@@ -26,9 +26,9 @@ app.use(cors({
 app.use("/user", userrouter);
 app.use("/category", categoryrouter);
 app.use("/product", productrouter);
-app.use("/bag", Bagroutes);
-app.use("/wishlist", Wishlistroutes);
-app.use("/order", OrderRoutes);
+app.use("/bag", bagroutes);
+app.use("/wishlist", wishlistroutes);
+app.use("/order", orderRoutes);
 app.use("/recently-viewed", recentlyViewedRoutes);
 app.use("/history", historyRoutes);
 app.use("/recommendations", recommendationRoutes);
