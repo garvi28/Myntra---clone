@@ -32,12 +32,23 @@ app.use("/order", OrderRoutes);
 app.use("/recently-viewed", recentlyViewedRoutes);
 app.use("/history", historyRoutes);
 app.use("/recommendations", recommendationRoutes);
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Mongodb connected");
-  })
-  .catch((err) => console.log(err));
-
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+const startServer = () => {
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+};
+
+if (process.env.MONGO_URI) {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log("Mongodb connected");
+      startServer();
+    })
+    .catch((err) => {
+      console.log("MongoDB connection failed:", err);
+      startServer();
+    });
+} else {
+  console.log("Warning: MONGO_URI not set. Starting server without MongoDB.");
+  startServer();
+}
