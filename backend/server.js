@@ -17,12 +17,12 @@ const cors = require('cors');
 console.log("MONGO_URI:", process.env.MONGO_URI);
 const app = express();
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("Myntra Backend Running Successfully 🚀");
+});
 app.use(cors({
   origin: "http://localhost:3000" // or your frontend URL
 })); 
-app.get("/", (req, res) => {
-  res.send("✅ Myntra backend in working");
-});
 app.use("/user", userrouter);
 app.use("/category", categoryrouter);
 app.use("/product", productrouter);
